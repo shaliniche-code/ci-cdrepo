@@ -48,7 +48,7 @@ pipeline {
                       docker pull shalinidocker12/projectapp:v1
                       docker stop app || true
                       docker rm app || true
-                      docker run -d -p 80:3000 --name app shalinidocker12/projectapp:v1
+                      docker run -d -p 8000:5000 --name app shalinidocker12/projectapp:v1
                       EOF
                            '''
                     }
