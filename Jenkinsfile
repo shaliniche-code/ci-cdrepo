@@ -44,7 +44,7 @@ pipeline {
         stage('Deploy to EC2') {
     steps {
         sh '''
-        ssh -i ~/.ssh/id_ed25519 ubuntu@15.206.168.164 << EOF
+        ssh ubuntu@15.206.168.164 << EOF
         docker pull shalinidocker12/projectapp:v1
         docker stop app || true
         docker rm app || true
