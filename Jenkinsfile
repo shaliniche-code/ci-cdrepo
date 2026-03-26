@@ -46,6 +46,7 @@ pipeline {
         sh '''
 ssh ubuntu@15.206.168.164 << 'EOF'
 docker pull shalinidocker12/projectapp:v1
+docker rmi -f shalinidocker12/projectapp:v1 || true
 docker stop app || true
 docker rm app || true
 docker run -d -p 8000:5000 --name app shalinidocker12/projectapp:v1
