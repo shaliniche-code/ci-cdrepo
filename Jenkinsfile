@@ -11,16 +11,6 @@ pipeline {
             }
         }
 
-        stage('Clean Old Containers') {
-            steps {
-                sh '''
-                docker-compose down || true
-                docker rm -f nodeapp || true
-                docker system prune -f || true
-                '''
-            }
-        }
-
         stage('Build Image') {
             steps {
                 sh 'docker build -t projectapp:v1 .'
@@ -50,5 +40,19 @@ pipeline {
                 sh 'docker push shalinidocker12/projectapp:v1'
             }
         }
+        
+        stage('Deploy to EC2') {
+    steps {
+        sh '''
+        ssh -i ~/.ssh/id_ed25519 ubuntu@15.206.168.164 << EOF
+        docker pull shalinidocker12/projectapp:v1
+        docker stop app || true
+        docker rm app || true
+        docker run -d -p 80:5000 --name newapp shalinidocker12/projectapp:v1
+        EOF
+        '''
+    }
+}
+
     }
 }
