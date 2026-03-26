@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("poll jenkins Webhook final 🚀");
+  res.send("EC2 auto deploy 🚀");
 });
 
 app.listen(5000, "0.0.0.0", () => {
